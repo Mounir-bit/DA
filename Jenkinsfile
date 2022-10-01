@@ -2,7 +2,16 @@ pipeline {
     agent any
     tools {
         maven 'Maven'
+        
+     
     }
+    environment {
+            NEXUS_VERSION = 'nexus3'
+            NEXUS_PROTOCOL = 'http'
+            NEXUS_URL = 'localhost:8084'
+            NEXUS_REPOSITORY = 'maven-nexus-repo'
+            NEXUS_CREDENTIAL_ID = 'nexus-user-credentials'
+      }
     stages {
         stage('Build') {
             steps {
