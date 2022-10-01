@@ -1,18 +1,18 @@
 pipeline {
     agent any
     tools {
-        maven 'maven'
+        maven 'Maven'
     }
     stages {
         stage('Build') {
             steps {
-                bat 'mvn clean install'
+                bat 'mvn clean install -DskipTests=true'
             }
         }
         stage('Testing'){
             steps{
                 //sonarqube
-                bat 'mvn test'
+                bat 'mvn test  -DskipTests=true'
             }
         }
     }

@@ -5,7 +5,7 @@ spring:
     hikari:
       connectionTimeout: 20000
       maximumPoolSize: 5
-    password: NAJWA5ouloud
+    password: admin   
     url: jdbc:postgresql://localhost:5432/DevOpsBootCamp
     username: postgres
   jpa:
