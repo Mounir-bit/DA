@@ -24,6 +24,13 @@ pipeline {
                 bat 'mvn test  -DskipTests=true'
             }
         }
+        stage("Build docker image"){
+                    steps{
+                        script{
+                            bat "docker build -t gomycode ."
+                        }
+                    }
+                 }
         stage("Publish to Nexus Repository Manager") {
                     steps {
                         script {
