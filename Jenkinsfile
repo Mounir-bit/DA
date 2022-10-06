@@ -31,6 +31,15 @@ pipeline {
                         }
                     }
                  }
+        stage("Push docker image to dockerhub"){
+                     steps{
+                         withCredentials([string(credentialsId: 'Dockerhubpwd', variable: 'Dockerhubpwd')]) {
+                             bat "docker login -u mounirsallem -p ${Dockerhubpwd}"
+                             bat "docker tag gomycode mounirsallem/gomycode:pipline"
+                             bat "docker push mounirsallem/gomycode:pipline"
+                         }
+                     }
+                  }
         stage("Publish to Nexus Repository Manager") {
                     steps {
                         script {
