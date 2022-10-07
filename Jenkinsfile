@@ -34,7 +34,7 @@ pipeline {
         stage("Push docker image to dockerhub"){
                      steps{
                          withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerhubpwd')]) {
-                             bat "docker login -u mounirsallem -p ${dockerhubpwd}"
+                             bat "docker login -u mounirsallem -p mounirsal"
                              bat "docker tag gomycode mounirsallem/gomycode:pipline"
                              bat "docker push mounirsallem/gomycode:pipline"
                          }
