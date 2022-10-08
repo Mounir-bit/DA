@@ -20,7 +20,7 @@ pipeline {
         }
         stage('Testing'){
             steps{
-                //sonarqube
+                sonarqube
                 bat 'mvn test  -DskipTests=false'
             }
         }
