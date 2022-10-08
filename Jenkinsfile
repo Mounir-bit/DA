@@ -18,10 +18,12 @@ pipeline {
                 bat 'mvn clean install'
             }
         }
-        stage('Testing'){
+        stage('Scan'){
             steps{
-                sonarqube
-                bat 'mvn test  -DskipTests=false'
+                withSonarQubeEnv('sonar'){
+                     bat 'mvn sonar:sonar'   
+                }
+                
             }
         }
         stage("Build docker image"){
