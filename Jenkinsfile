@@ -21,7 +21,7 @@ pipeline {
         stage('Testing'){
             steps{
                 //sonarqube
-                bat 'mvn test  -DskipTests=true'
+                bat 'mvn test  -DskipTests=false'
             }
         }
         stage("Build docker image"){
