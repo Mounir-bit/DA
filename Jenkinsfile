@@ -15,13 +15,13 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                bat 'mvn clean install -DskipTests=true'
+                bat 'mvn clean install'
             }
         }
         stage('Testing'){
             steps{
-                //sonarqube
-                bat 'mvn test  -DskipTests=true'
+                sonarqube
+                bat 'mvn test  -DskipTests=false'
             }
         }
         stage("Build docker image"){
@@ -34,7 +34,7 @@ pipeline {
         stage("Push docker image to dockerhub"){
                      steps{
                          withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerhubpwd')]) {
-                             bat "docker login -u mounirsallem -p ${dockerhubpwd}"
+                             bat "docker login -u mounirsallem -p mounirsal"
                              bat "docker tag gomycode mounirsallem/gomycode:pipline"
                              bat "docker push mounirsallem/gomycode:pipline"
                          }
@@ -43,6 +43,7 @@ pipeline {
         stage("Publish to Nexus Repository Manager") {
                     steps {
                         script {
+                            
                             pom = readMavenPom file: "pom.xml";
                             filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
                             echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
